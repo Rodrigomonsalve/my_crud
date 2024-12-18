@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+</head>
+<body>
+    <div>
+        <h1>Lista de clientes</h1>
+        <table>
+            <tr>
+                <td>NOMBRE</td>
+                <td>APELLIDO</td>
+                <td>TELEFONO</td>
+                <td>DOMICILIOS</td>
+                <td>ACCIONES</td>
+            </tr>
+
+            <tr th:each="data : ${Clientes}">
+
+                <td th:text="${data.nombre}"></td>
+                <td th:text="${data.apellido}"></td>
+                <td th:text="${data.telefono}"></td>
+                <td>
+                    <ul>
+                        <li th:each="domicilios : ${data.domicilio}" th:text="${domicilios}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <form th:action="@{/updateClient}" method="get">
+
+                        <input type="hidden" name="clientId" th:value="${data.id_clients}">
+                        <button type="submit">Actualizar</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/eliminarCliente}" method="get">
+                        <input type="hidden" name="cienteId" th:value="${data.id_clients}">
+                        <button type="submit">Eliminar</button>
+                    </form>
+
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>

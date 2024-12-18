@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+</head>
+<body>
+
+    <form th:action="@{/agregarCliente}" th:object=${cliente} method="POST">
+
+        <input type="hidden" th:field="*{id_clients}">
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}">
+
+        <label>Apellido:</label>
+        <input type="text" th:field="*{apellido}">
+
+        <label>Telefono:</label>
+        <input type="text" th:field="*{telefono}">
+
+        <label>Domicilios:</label>
+        <div th:each="domicilio : ${cliente
+        .domicilio}">
+
+            <label>Calle:</label>
+            <input type="text" th:value="${domicilio.calle}">
+
+            <label>Colonia:</label>
+            <input type="text" th:value="${domicilio.colonia}">
+
+            <label>Alcaldía:</label>
+            <input type="text" th:value="${domicilio.alcaldia}">
+
+            <label>Entidad</label>
+            <input type="text" th:value="${domicilio.entidad}">
+
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+</html>
